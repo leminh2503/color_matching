@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import getColor from "./randomColor";
-import Game from './Game';
-function Header ({name}) {
+import Game from "./Game";
+function Header({ name }) {
   const colorList = getColor(8);
-  console.log(colorList);
+  function handleActive(index) {
+    setActive('active')
+  }
   return (
     <section class="color-background">
       <div class="game">
@@ -13,7 +15,11 @@ function Header ({name}) {
           <button class="game__button">Play Again</button>
         </div>
         <div class="game__board">
-          {colorList.map(color => <Game color={color}/>)}
+          <ul id="colorList" class="color-list">
+            {colorList.map((color, index) => (
+              <Game color={color} index={index} active={active} handleActive={handleActive}/>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
